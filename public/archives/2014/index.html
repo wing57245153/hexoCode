@@ -56,15 +56,13 @@
       
       
   
-    <h1 class="title"><a href="/2014/09/09/dragonBonesCpp01/"></a></h1>
+    <h1 class="title"><a href="/2014/09/09/dragonBonesCpp01/">dragonBonesCpp修改，运行于cocos2d-x3.2版本</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>title: dragonBonesCpp修改，运行于cocos2d-x3.2版本<br>date: 2014-09-09 23:20:04</p>
-<h2 id="tags:DragonBonesCpp">tags:DragonBonesCpp</h2>
-<h1 id="dragonBones版本">dragonBones版本</h1>
+        <h1 id="dragonBones版本">dragonBones版本</h1>
 <p>官方最新版本</p>
 <h1 id="cocos2d-x版本">cocos2d-x版本</h1>
 <p>最新cocos2d-x3.2版本</p>
@@ -74,7 +72,12 @@
 <p>修改draw方法的声明</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="keyword">virtual</span> <span class="keyword">void</span> draw(Renderer *renderer, <span class="keyword">const</span> Mat4& transform, uint32_t flags) <span class="keyword">override</span>;
-</pre></td></tr></table></figure><br>include引用修改：<br>‘’’<br>//#include “kazmath/GL/matrix.h”<br> #include “math/CCMath.h”<br>‘’’<br><br>‘’’<br>//#include “CCShaderCache.h”<br> #include “CCGLProgramCache.h”<br>‘’’<br><br>‘’’<br>//#include “TransformUtils.h”<br>‘’’<br><br>setShaderProgram参数值修改为<br>‘’’<br>setShaderProgram(GLProgramCache::getInstance()-&gt;getProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));<br>‘’’<br><br>draw方法修改为：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td></tr></table></figure><br>include引用修改：<br><br>//#include “kazmath/GL/matrix.h”<br>#include “math/CCMath.h”<br><br><br>//#include “CCShaderCache.h”<br> #include “CCGLProgramCache.h”<br><br>//include “TransformUtils.h”<br><br>setShaderProgram参数值修改为<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>setShaderProgram<span class="function"><span class="params">(GLProgramCache::getInstance()-&gt;getProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP))</span>;</span>
+</pre></td></tr></table></figure>
+
+<p>draw方法修改为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -110,9 +113,8 @@
 }
 </pre></td></tr></table></figure>
 
-<p>CCGeometry.h引用修改为:<br>‘’’</p>
+<p>CCGeometry.h引用修改为:</p>
 <h1 id="include_“math/CCGeometry-h”">include “math/CCGeometry.h”</h1>
-<p>‘’’</p>
 
       
     </div>
@@ -217,6 +219,8 @@ v.push_back(func);
 <div class="widget tag">
   <h3 class="title">Tags</h3>
   <ul class="entry">
+  
+    <li><a href="/tags/DragonBonesCpp/">DragonBonesCpp</a><small>1</small></li>
   
     <li><a href="/tags/c++/">c++</a><small>1</small></li>
   
