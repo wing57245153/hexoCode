@@ -48,6 +48,89 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2014-09-09T15:20:04.000Z"><a href="/2014/09/09/dragonBonesCpp01/">Sep 9 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/09/09/dragonBonesCpp01/"></a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>title: dragonBonesCpp修改，运行于cocos2d-x3.2版本<br>date: 2014-09-09 23:20:04</p>
+<h2 id="tags:DragonBonesCpp">tags:DragonBonesCpp</h2>
+<h1 id="dragonBones版本">dragonBones版本</h1>
+<p>官方最新版本</p>
+<h1 id="cocos2d-x版本">cocos2d-x版本</h1>
+<p>最新cocos2d-x3.2版本</p>
+<h1 id="修改内容">修改内容</h1>
+<p>直接使用dragonBones时，是编译不通过的，在rc0版本可以正常编译，可能官方的dragonBones是在3.1之前的版本开发的，所以在cocos2d-x3.2时，由于渲染的代码修改，所以需要对其对应的修改；<br>修改如下：</p>
+<h2 id="Cocos2dxAtlasNode">Cocos2dxAtlasNode</h2>
+<p>修改draw方法的声明</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">virtual</span> <span class="keyword">void</span> draw(Renderer *renderer, <span class="keyword">const</span> Mat4& transform, uint32_t flags) <span class="keyword">override</span>;
+</pre></td></tr></table></figure><br>include引用修改：<br>‘’’<br>//#include “kazmath/GL/matrix.h”<br> #include “math/CCMath.h”<br>‘’’<br><br>‘’’<br>//#include “CCShaderCache.h”<br> #include “CCGLProgramCache.h”<br>‘’’<br><br>‘’’<br>//#include “TransformUtils.h”<br>‘’’<br><br>setShaderProgram参数值修改为<br>‘’’<br>setShaderProgram(GLProgramCache::getInstance()-&gt;getProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP));<br>‘’’<br><br>draw方法修改为：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre>void Cocos2dxAtlasNode<span class="value">::draw(Renderer *renderer, const Mat4& transform, uint32_t flags)
+{
+    CC_NODE_DRAW_SETUP();</span>
+
+    
+    _quadCommand<span class="class">.init</span>(
+        _globalZOrder,
+        m_pTextureAtlas-&gt;<span class="function">getTexture()</span>-&gt;<span class="function">getName()</span>,
+        _glProgramState,
+        m_tBlendFunc,
+        m_pTextureAtlas-&gt;<span class="function">getQuads()</span> + m_nQuadIndex,
+        1,
+        <span class="attribute">transform</span>);
+
+    renderer-&gt;<span class="function">addCommand(&_quadCommand)</span>;
+
+}
+</pre></td></tr></table></figure>
+
+<p>CCGeometry.h引用修改为:<br>‘’’</p>
+<h1 id="include_“math/CCGeometry-h”">include “math/CCGeometry.h”</h1>
+<p>‘’’</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2014-06-14T10:25:46.000Z"><a href="/2014/06/14/learn_c++00/">Jun 14 2014</a></time>
       
       
